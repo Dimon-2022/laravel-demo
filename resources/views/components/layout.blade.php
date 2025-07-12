@@ -21,6 +21,8 @@
                     <x-nav-link href="/" :active="request()->is('/') ? true : false">Home</x-nav-link>
                     <x-nav-link href="/jobs" :active="request()->is('jobs') ? true : false">Jobs</x-nav-link>
                     <x-nav-link href="/stocks" :active="request()->is('stocks') ? true : false">My stocks</x-nav-link>
+                    <x-nav-link href="/books" :active="request()->is('books') ? true : false">Books</x-nav-link>
+                     <x-nav-link href="/students" :active="request()->is('students') ? true : false">Students</x-nav-link>
                     <x-nav-link href="/contact" :active="request()->is('contact') ? true : false">Contact</x-nav-link>
                 </div>
             </div>

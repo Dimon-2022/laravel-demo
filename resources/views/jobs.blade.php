@@ -12,6 +12,9 @@
                 </div>
             </a>
         @endforeach
+        <div>
+            {{$jobs->links()}}
+        </div>
    </div>
 
 

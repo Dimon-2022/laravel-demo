@@ -12,10 +12,21 @@ Route::get('/', function () {
 });
 
 Route::get('/jobs', function () {
-    $jobs = Job::with('employer')->simplePaginate(3);
-    return view('jobs', [
+    $jobs = Job::with('employer')->latest()->simplePaginate(3);
+    return view('jobs.index', [
      'jobs' => $jobs
     ]);
+});
+
+Route::post('/jobs', function () {
+    Job::create([
+        'title' => request('title'),
+        'salary' => request('salary'),
+        'employer_id' => 1
+        //$_POST['title'];
+    ]);
+
+    return redirect('/jobs');
 });
 
 Route::get('/stocks', function () {
@@ -32,35 +43,26 @@ Route::get('/stock/{id}', function ($id) {
 
 Route::get('/books', function () {
     return view(
-        'books', [
+        'books',
+        [
             'books' => Book::all()
         ]
     );
 });
 
-Route::get('/book/{id}', function ($id){
+Route::get('/book/{id}', function ($id) {
     $book = Book::find($id);
-    
+
     return view('book', ['book' => $book]);
 });
 
-
-
-
-
-
-
-
-
-
-
-Route::get('/students', function(){
-    return view('students',[
+Route::get('/students', function () {
+    return view('students', [
         'students' => Student::all()
     ]);
 });
 
-Route::get('/student/{id}', function($id){
+Route::get('/student/{id}', function ($id) {
     $student = Student::find($id);
 
     return view('student', [
@@ -68,32 +70,16 @@ Route::get('/student/{id}', function($id){
     ]);
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::get('/contact', function () {
     return view('contact');
+});
+
+Route::get('/jobs/create', function () {
+    return view('jobs.create');
 });
 
 Route::get('/jobs/{id}', function ($id) {
     $job = Job::find($id);
 
-    return view('job', ['job' => $job]);
+    return view('jobs.show', ['job' => $job]);
 });

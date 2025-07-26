@@ -66,13 +66,13 @@ Route::get('/student/{id}', function ($id) {
 
 Route::view('/contact', 'contact');
 
-/*
+
 
 //Index  -  show all jobs
 Route::get('/jobs', [JobController::class, 'index']);
 
 //store - persist data in db
-Route::post('/jobs',[JobController::class, 'store']);
+Route::post('/jobs',[JobController::class, 'store'])->middleware('auth');
 
 //create - show form for creating new job
 Route::get('/jobs/create',[JobController::class, 'create']);
@@ -81,7 +81,7 @@ Route::get('/jobs/create',[JobController::class, 'create']);
 Route::get('/jobs/{job}', [JobController::class, 'show']);
 
 //edit - show form for editing particular job
-Route::get('/jobs/{job}/edit',[JobController::class, 'edit']);
+Route::get('/jobs/{job}/edit',[JobController::class, 'edit'])->middleware('auth')->can('edit', 'job');
 
 //update - update job
 Route::patch('/jobs/{job}', [JobController::class, 'update']);
@@ -89,14 +89,14 @@ Route::patch('/jobs/{job}', [JobController::class, 'update']);
 //destroy - delete job
 Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
 
-*/
 
-Route::resource('jobs', JobController::class);
+
+//Route::resource('jobs', JobController::class)->middleware('auth');
 
 Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/login', [SessionController::class, 'create']);
+Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 
 Route::post('/logout', [SessionController::class, 'destroy']);
